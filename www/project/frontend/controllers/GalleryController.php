@@ -9,7 +9,7 @@ class GalleryController extends \yii\web\Controller
 {
     public function actionIndex()
     {
-        $conditions = ['id' => 1];
+        $conditions = ['id' => 1]; // change to id from user
         $albumList = Album::find()->where($conditions)->all();
         
         return $this->render('index', [

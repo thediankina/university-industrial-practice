@@ -2,14 +2,18 @@
 
 namespace frontend\controllers;
 
-use Yii;
-use yii\web\Controller;
+use frontend\models\Photo;
 
-class AlbumController extends Controller
+class AlbumController extends \yii\web\Controller
 {
-    public function actionView($id)
+    public function actionView($id, $name)
     {
-        return $this->render('view');
+        $conditions = ['album_id' => $id];
+        $photoList = Photo::find()->where($conditions)->all();
+        return $this->render('view', [
+            'name' => $name,
+            'photoList' => $photoList,
+        ]);
     }
 }
 

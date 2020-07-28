@@ -5,20 +5,21 @@ namespace frontend\models;
 use yii\db\ActiveRecord;
 
 /**
- * Description of Album
+ * Description of Photo
  *
  * @author Diana Galiulina
  */
-class Album extends ActiveRecord
+class Photo extends ActiveRecord
 {
     public static function tableName()
     {
-        return '{{album}}';
+        return '{{photo}}';
     }
     
     public function rules()
     {
         return [
+            ['album_id', 'required'],
             ['name', 'required'],
         ];
     }
