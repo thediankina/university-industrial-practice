@@ -1,0 +1,38 @@
+*{
+    box-sizing: border-box;
+}
+
+.row-album {
+    display: flex;
+    flex-flow: wrap;
+    padding: 2px;
+    flex: 50%;
+    max-height: 25%;
+}
+
+.column-album {
+    flex: 25%;
+    flex-grow: 1;
+    padding: 2px;
+}
+
+.column-album img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    vertical-align: middle;
+}
+
+@media screen and (max-width: 800px) {
+    .column-album {
+        flex: 50%;
+        max-width: 50%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .column-album {
+        flex: 100%;
+        max-width: 100%;
+    }
+}
