@@ -14,6 +14,7 @@ class AppAsset extends AssetBundle
     public $css = [
         'css/site.css',
         'css/album.css',
+        'css/photo.css',
     ];
     public $js = [
     ];

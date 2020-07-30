@@ -18,15 +18,15 @@ class SiteController extends \yii\web\Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'signup'],
+                'only' => ['logout', 'login', 'signup', 'albums'],
                 'rules' => [
                     [
-                        'actions' => ['signup'],
+                        'actions' => ['signup', 'login'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout'],
+                        'actions' => ['logout', 'albums'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -91,6 +91,13 @@ class SiteController extends \yii\web\Controller
             'model' => $model,
         ]);
     }
+    
+    public function actionAlbums() {
+        
+        
+        return $this->render(['gallery/index']);
+    }
+
 }
 //    /**
 //     * Displays contact page.

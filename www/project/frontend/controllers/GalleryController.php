@@ -4,19 +4,34 @@ namespace frontend\controllers;
 
 use Yii;
 use frontend\models\Album;
+use frontend\models\AlbumToUser;
 
 class GalleryController extends \yii\web\Controller
 {
-    public function actionIndex()
-    {
-        $conditions = ['id' => 1]; // change to id from user
-        $albumList = Album::find()->where($conditions)->all();
-        
-        return $this->render('index', [
-            'albumList' => $albumList,
-        ]);
+    public function actionIndex() {
+        $user = Yii::$app->user->id;    // Get current user id
+        $conditions = ['user_id' => $user];
+        $albumIdsList = AlbumToUser::find()->where($conditions)->all();
+        foreach ($albumIdsList as $albumId):
+            $albumList = Album::find()->where(['id' => $albumId]);
+        endforeach;
+        if ($albumList) {
+            $albumList = $albumList->all();
+            $albumExist = true;
+
+            return $this->render('index', [
+                        'albumList' => $albumList,
+                        'albumExist' => $albumExist,
+            ]);
+        } else {
+            $albumExist = false;
+
+            return $this->render('index', [
+                        'albumExist' => $albumExist,
+            ]);
+        }
     }
-    
+
     public function actionCreate()
     {
         $album = new Album();
