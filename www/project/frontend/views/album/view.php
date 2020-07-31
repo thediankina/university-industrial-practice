@@ -1,10 +1,33 @@
 <?php
 /* @var $album frontend\controllers\AlbumController */
+/* @var $modelPicture frontend\models\PictureForm */
 
 use yii\helpers\Url;
+use dosamigos\fileupload\FileUpload;
+
 ?>
 <h1><?php echo $name; ?></h1>
 
+<?= FileUpload::widget([
+    'model' => $modelPicture,
+    'attribute' => 'picture',
+    'url' => ['/album/upload-picture'],
+    'options' => ['accept' => 'image/*'],
+    'clientOptions' => [
+        'maxFileSize' => 2000000
+    ],
+    'clientEvents' => [
+        'fileuploaddone' => 'function(e, data) {
+                                console.log(e);
+                                console.log(data);
+                            }',
+        'fileuploadfail' => 'function(e, data) {
+                                console.log(e);
+                                console.log(data);
+                            }',
+    ],
+]); ?>
+<br><br>
 <?php if ($photoExist): ?>
     <div class="row-album">
         <?php foreach ($photoList as $photo): ?>
