@@ -11,7 +11,7 @@ use dosamigos\fileupload\FileUpload;
 <?= FileUpload::widget([
     'model' => $modelPicture,
     'attribute' => 'picture',
-    'url' => ['/album/upload-picture'],
+    'url' => ['/album/upload-picture', 'id' => $id],
     'options' => ['accept' => 'image/*'],
     'clientOptions' => [
         'maxFileSize' => 2000000

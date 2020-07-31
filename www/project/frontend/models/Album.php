@@ -16,6 +16,14 @@ class Album extends ActiveRecord
         return '{{album}}';
     }
     
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'id',
+            'name' => 'name',
+        ];
+    }
+    
     public function rules()
     {
         return [

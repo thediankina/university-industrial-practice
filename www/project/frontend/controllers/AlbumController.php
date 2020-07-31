@@ -2,10 +2,11 @@
 
 namespace frontend\controllers;
 
+use Yii;
+use frontend\models\Album;
 use frontend\models\Photo;
 use frontend\models\PictureForm;
 use yii\web\UploadedFile;
-use yii\web\Response;
 
 
 class AlbumController extends \yii\web\Controller {
@@ -23,6 +24,7 @@ class AlbumController extends \yii\web\Controller {
                         'photoList' => $photoList,
                         'photoExist' => $photoExist,
                         'name' => $name,
+                        'id' => $id,
                         'modelPicture' => $modelPicture,
             ]);
         } else {
@@ -31,22 +33,27 @@ class AlbumController extends \yii\web\Controller {
             return $this->render('view', [
                         'photoExist' => $photoExist,
                         'name' => $name,
+                        'id' => $id,
                         'modelPicture' => $modelPicture,
             ]);
         }
     }
     
-    public function actionUploadPicture()
-    {
+    public function actionUploadPicture($id) {
         $model = new PictureForm();
         $model->picture = UploadedFile::getInstance($model, 'picture');
-        
+
         if ($model->validate()) {
-            echo 'ok';
-        }
-        else {
+
+            $albumId = $id;
+            $pictureUri = Yii::$app->storage->saveUploadedFile($model->picture);
+            $photo = new Photo();
+            $photo->album_id = $albumId;
+            $photo->name = $pictureUri;
+            $photo->save();
+            
+        } else {
             print_r($model->getErrors());
         }
     }
-
 }

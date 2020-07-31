@@ -16,6 +16,14 @@ class Photo extends ActiveRecord
         return '{{photo}}';
     }
     
+    public function attributeLabels()
+    {
+        return [
+            'album_id' => 'album_id',
+            'name' => 'name',
+        ];
+    }
+    
     public function rules()
     {
         return [
