@@ -36,21 +36,22 @@ class GalleryController extends \yii\web\Controller
     }
 
     public function actionCreate() {
-        $newalbum = new Album();
+        $newAlbum = new Album();
         
-        if ($newalbum->load(Yii::$app->request->post())) {
-            $newalbum->save();
-            $albumtouser = new AlbumToUser();
-            $albumtouser->album_id = $newalbum->id;
-            $albumtouser->user_id = Yii::$app->user->id;
-            $albumtouser->save();
+        if ($newAlbum->load(Yii::$app->request->post())) {
+            $newAlbum->preview = Album::DEFAULT_IMAGE;
+            $newAlbum->save();
+            $albumToUser = new AlbumToUser();
+            $albumToUser->album_id = $newAlbum->id;
+            $albumToUser->user_id = Yii::$app->user->id;
+            $albumToUser->save();
 
             Yii::$app->session->setFlash('success', 'Saved.');
             return $this->redirect(['gallery/index']);
         }
         
         return $this->render('create', [
-                    'album' => $newalbum,
+                    'album' => $newAlbum,
         ]);
     }
 }

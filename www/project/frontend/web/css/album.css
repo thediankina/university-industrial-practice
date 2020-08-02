@@ -23,6 +23,14 @@
     vertical-align: middle;
 }
 
+.preview-album {
+    border-radius: 5px;
+}
+
+.indicate-number {
+    color: #808080;
+}
+
 @media screen and (max-width: 800px) {
     .column-album {
         flex: 50%;

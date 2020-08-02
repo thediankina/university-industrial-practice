@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use Yii;
 use frontend\models\Photo;
+use frontend\models\Album;
 use frontend\models\PictureForm;
 use yii\web\UploadedFile;
 use yii\web\Response;
@@ -52,6 +53,11 @@ class AlbumController extends \yii\web\Controller {
             $photo->album_id = $albumId;
             $photo->name = $pictureUri;
             $photo->save();
+            $checkAlbumPreview = Album::findOne($albumId);
+            if ($checkAlbumPreview->preview === Album::DEFAULT_IMAGE){
+                $checkAlbumPreview->preview = $photo->name;
+                $checkAlbumPreview->update();
+            }
             return ['success' => true,
                 'pictureUri' => Yii::$app->storage->getFile($photo->name)];
         }

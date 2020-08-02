@@ -11,6 +11,8 @@ use yii\db\ActiveRecord;
  */
 class Album extends ActiveRecord
 {
+    const DEFAULT_IMAGE = 'none.jpg';
+    
     public static function tableName()
     {
         return '{{album}}';

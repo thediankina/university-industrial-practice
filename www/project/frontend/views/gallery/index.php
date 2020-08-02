@@ -3,6 +3,7 @@
 /* @var $albumList[] frontend\models\Album */
 
 use yii\helpers\Url;
+use frontend\models\Photo;
 ?>
 <h1>Albums</h1>
 
@@ -10,9 +11,14 @@ use yii\helpers\Url;
 <?php if ($albumExist): ?>
     <?php foreach ($albumList as $album): ?>
         <a href="<?php echo Url::to(['/album/view', 'id' => $album->id, 'name' => $album->name]); ?>">
-            <h3><?php echo $album->name; ?></h3>
+            <img class="preview-album" src="<?php echo "/uploads/" . $album->preview; ?>" style="width:25%"/>
         </a>
-        <hr>
+        <h4><?php echo $album->name; ?></h4>
+        <div class="indicate-number"><h5><?php
+        $countPhotos = Photo::find()->where(['album_id' => $album->id])->count();
+        $album->number_of_photos = $countPhotos;
+        $album->update();
+        echo $album->number_of_photos." elements"; ?></h5></div>
     <?php
     endforeach;
 else:
