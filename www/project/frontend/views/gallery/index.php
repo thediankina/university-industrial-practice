@@ -6,6 +6,7 @@ use yii\helpers\Url;
 ?>
 <h1>Albums</h1>
 
+<a href="<?php echo Url::to(['/gallery/create']); ?>" class="btn btn-primary">Create new</a><br><br>
 <?php if ($albumExist): ?>
     <?php foreach ($albumList as $album): ?>
         <a href="<?php echo Url::to(['/album/view', 'id' => $album->id, 'name' => $album->name]); ?>">

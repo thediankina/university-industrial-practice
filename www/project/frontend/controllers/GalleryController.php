@@ -9,13 +9,16 @@ use frontend\models\AlbumToUser;
 class GalleryController extends \yii\web\Controller
 {
     public function actionIndex() {
-        $user = Yii::$app->user->id;    // Get current user id
+        $user = Yii::$app->user->id;
         $conditions = ['user_id' => $user];
         $albumIdsList = AlbumToUser::find()->where($conditions)->all();
+        $condition = [];
         foreach ($albumIdsList as $albumId):
-            $albumList = Album::find()->where(['id' => $albumId]);
+            $albumIdstring = $albumId->album_id;
+            array_push($condition, $albumIdstring);
         endforeach;
-        if ($albumList) {
+        $albumList = Album::find()->where(['id' => $condition]);
+        if ($albumIdsList) {
             $albumList = $albumList->all();
             $albumExist = true;
 
@@ -32,16 +35,22 @@ class GalleryController extends \yii\web\Controller
         }
     }
 
-    public function actionCreate()
-    {
-        $album = new Album();
-        if ($album->load(Yii::$app->request->post()) && $album->save()) {
+    public function actionCreate() {
+        $newalbum = new Album();
+        
+        if ($newalbum->load(Yii::$app->request->post())) {
+            $newalbum->save();
+            $albumtouser = new AlbumToUser();
+            $albumtouser->album_id = $newalbum->id;
+            $albumtouser->user_id = Yii::$app->user->id;
+            $albumtouser->save();
+
             Yii::$app->session->setFlash('success', 'Saved.');
             return $this->redirect(['gallery/index']);
         }
+        
         return $this->render('create', [
-            'album' => $album,
+                    'album' => $newalbum,
         ]);
     }
-
 }

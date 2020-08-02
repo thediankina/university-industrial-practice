@@ -3,10 +3,10 @@
 namespace frontend\controllers;
 
 use Yii;
-use frontend\models\Album;
 use frontend\models\Photo;
 use frontend\models\PictureForm;
 use yii\web\UploadedFile;
+use yii\web\Response;
 
 
 class AlbumController extends \yii\web\Controller {
@@ -40,6 +40,7 @@ class AlbumController extends \yii\web\Controller {
     }
     
     public function actionUploadPicture($id) {
+        Yii::$app->response->format = Response::FORMAT_JSON;
         $model = new PictureForm();
         $model->picture = UploadedFile::getInstance($model, 'picture');
 
@@ -51,9 +52,9 @@ class AlbumController extends \yii\web\Controller {
             $photo->album_id = $albumId;
             $photo->name = $pictureUri;
             $photo->save();
-            
-        } else {
-            print_r($model->getErrors());
+            return ['success' => true,
+                'pictureUri' => Yii::$app->storage->getFile($photo->name)];
         }
+        return ['success' => false, 'errors' => $model->getErrors()];
     }
 }

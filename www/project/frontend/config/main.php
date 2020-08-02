@@ -39,9 +39,6 @@ return [
         'storage' => [
             'class' => 'frontend\components\Storage',
         ],
-        'album' => [
-            'class' => 'frontend\models\Album',
-        ],
         'request' => ['baseUrl' => ''],
                 'urlManager' => [
                     'enablePrettyUrl' => true,

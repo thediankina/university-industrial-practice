@@ -18,22 +18,28 @@ use dosamigos\fileupload\FileUpload;
     ],
     'clientEvents' => [
         'fileuploaddone' => 'function(e, data) {
-                                console.log(e);
-                                console.log(data);
-                            }',
-        'fileuploadfail' => 'function(e, data) {
-                                console.log(e);
-                                console.log(data);
-                            }',
+            if (data.result.success) {
+                sessionStorage.reloadAfterPageLoad = true;
+                location.reload();
+                sessionStorage.reloadAfterPageLoad = false;
+                $("#upload-image-success").show();
+                $("#upload-image-fail").hide();
+            } else {
+                $("#upload-image-fail").html(data.result.errors.picture).show();
+                $("#upload-image-success").hide();
+            }
+        }',
     ],
 ]); ?>
 <br><br>
+<div class="alert alert-success" style="display: none" id="upload-image-success">Image was uploaded successfully</div>
+<div class="alert alert-danger" style="display: none" id="upload-image-fail"></div>
 <?php if ($photoExist): ?>
     <div class="row-album">
         <?php foreach ($photoList as $photo): ?>
             <div class="column-album">
                 <a href="<?php echo Url::to(['/photo/view', 'id' => $photo->id, 'name' => $photo->name]); ?>">
-                    <img src="<?php echo "/uploads/" . $photo->name; ?>" style="width:100%">
+                    <img src="<?php echo "/uploads/" . $photo->name; ?>" style="width:100%"/>
                 </a>
             </div>
         <?php endforeach; ?>
