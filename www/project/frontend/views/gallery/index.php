@@ -6,6 +6,7 @@ use yii\helpers\Url;
 use frontend\models\Photo;
 
 $this->title = 'My photo gallery';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <h1>Albums</h1>
 

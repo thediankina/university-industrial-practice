@@ -5,7 +5,7 @@ namespace frontend\models;
 use yii\db\ActiveRecord;
 
 /**
- * Description of Album
+ * Description of AlbumToUser
  *
  * @author Diana Galiulina
  */

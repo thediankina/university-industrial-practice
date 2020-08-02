@@ -60,7 +60,7 @@ class SiteController extends \yii\web\Controller
         $model = new LoginForm();
         
         if ($model->load(Yii::$app->request->post()) && $model->login()){
-            return $this->redirect(['site/index']);
+            return $this->redirect(['gallery/index']);
         }
         return $this->render('login', [
                 'model' => $model,
@@ -80,8 +80,8 @@ class SiteController extends \yii\web\Controller
         
         if ($model->load(Yii::$app->request->post()) && $user = $model->signup()) {
             Yii::$app->user->login($user);
-            Yii::$app->session->setFlash('success', 'User registered.');
-            return $this->redirect(['site/index']);
+            Yii::$app->session->setFlash('success', 'You were successfully signup');
+            return $this->redirect(['gallery/index']);
         }
         return $this->render('signup', [
             'model' => $model,
