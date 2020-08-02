@@ -4,6 +4,8 @@
 
 use yii\helpers\Url;
 use frontend\models\Photo;
+
+$this->title = 'My photo gallery';
 ?>
 <h1>Albums</h1>
 

@@ -5,6 +5,7 @@
 use yii\helpers\Url;
 use dosamigos\fileupload\FileUpload;
 
+$this->title = $name.' - Album';
 ?>
 <h1><?php echo $name; ?></h1>
 

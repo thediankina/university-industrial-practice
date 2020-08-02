@@ -6,6 +6,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
+$this->title = 'Create new album';
 ?>
 
 <?php $form = ActiveForm::begin(); ?>

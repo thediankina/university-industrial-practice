@@ -18,6 +18,7 @@ class AlbumController extends \yii\web\Controller {
 
         $conditions = ['album_id' => $id];
         $photoList = Photo::find()->where($conditions)->all();
+
         if ($photoList) {
             $photoExist = true;
 

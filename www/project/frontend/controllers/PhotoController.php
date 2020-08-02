@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use frontend\models\Photo;
+use frontend\models\Album;
 
 class PhotoController extends \yii\web\Controller
 {

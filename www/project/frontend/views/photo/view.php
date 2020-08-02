@@ -1,5 +1,7 @@
 <?php
 /* @var $album frontend\controllers\AlbumController */
+
+$this->title = 'View photo';
 ?>
 
 <img class="only-photo" src="<?php echo "/uploads/" . $name; ?>" style="float: top; max-width:100%; height:auto">
