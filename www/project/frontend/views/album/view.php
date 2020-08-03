@@ -1,5 +1,6 @@
 <?php
-/* @var $album frontend\controllers\AlbumController */
+/* @var $name frontend\controllers\AlbumController */
+/* @var $id frontend\controllers\AlbumController */
 /* @var $modelPicture frontend\models\PictureForm */
 
 use yii\helpers\Url;

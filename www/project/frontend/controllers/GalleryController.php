@@ -6,18 +6,29 @@ use Yii;
 use frontend\models\Album;
 use frontend\models\AlbumToUser;
 
-class GalleryController extends \yii\web\Controller
-{
+/**
+ * Gallery controller
+ */
+class GalleryController extends \yii\web\Controller {
+    
+    /**
+     * Prepare data for gallery view
+     * @return mixed
+     */
     public function actionIndex() {
+        
         $user = Yii::$app->user->id;
-        $conditions = ['user_id' => $user];
-        $albumIdsList = AlbumToUser::find()->where($conditions)->all();
-        $condition = [];
+        // Search albums ids which this user has
+        $condition = ['user_id' => $user];
+        $albumIdsList = AlbumToUser::find()->where($condition)->all();
+        // Search albums with such ids
+        $conditions = [];
         foreach ($albumIdsList as $albumId):
             $albumIdstring = $albumId->album_id;
-            array_push($condition, $albumIdstring);
+            array_push($conditions, $albumIdstring);
         endforeach;
-        $albumList = Album::find()->where(['id' => $condition]);
+        $albumList = Album::find()->where(['id' => $conditions]);
+        // If found or didn't find some albums
         if ($albumIdsList) {
             $albumList = $albumList->all();
             $albumExist = true;
@@ -34,13 +45,19 @@ class GalleryController extends \yii\web\Controller
             ]);
         }
     }
-
+    
+    /**
+     * Create new album
+     * @return mixed
+     */
     public function actionCreate() {
+        
         $newAlbum = new Album();
         
         if ($newAlbum->load(Yii::$app->request->post())) {
             $newAlbum->preview = Album::DEFAULT_IMAGE;
             $newAlbum->save();
+            // Create connection with user
             $albumToUser = new AlbumToUser();
             $albumToUser->album_id = $newAlbum->id;
             $albumToUser->user_id = Yii::$app->user->id;

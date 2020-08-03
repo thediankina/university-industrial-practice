@@ -36,6 +36,7 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        // store uploaded images
         'storage' => [
             'class' => 'frontend\components\Storage',
         ],

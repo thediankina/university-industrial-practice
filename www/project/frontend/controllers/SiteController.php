@@ -7,6 +7,9 @@ use yii\filters\AccessControl;
 use common\models\LoginForm;
 use frontend\models\SignupForm;
 
+/**
+ * Site controller
+ */
 class SiteController extends \yii\web\Controller
 {
     public function behaviors()
@@ -54,7 +57,10 @@ class SiteController extends \yii\web\Controller
     {
         return $this->render('index');
     }
-
+    
+    /**
+     * Login for guests
+     */
     public function actionLogin()
     {
         $model = new LoginForm();
@@ -66,7 +72,10 @@ class SiteController extends \yii\web\Controller
                 'model' => $model,
             ]);
     }
-
+    
+    /**
+     * Logout for users
+     */
     public function actionLogout()
     {
         Yii::$app->user->logout();
@@ -74,6 +83,9 @@ class SiteController extends \yii\web\Controller
         return $this->redirect(['site/index']);
     }
 
+    /**
+     * Signup for guests
+     */
     public function actionSignup()
     {
         $model = new SignupForm();
@@ -88,6 +100,9 @@ class SiteController extends \yii\web\Controller
         ]);
     }
     
+    /**
+     * Albums for users
+     */
     public function actionAlbums() {
         
         

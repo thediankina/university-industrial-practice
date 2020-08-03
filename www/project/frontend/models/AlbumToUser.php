@@ -5,8 +5,12 @@ namespace frontend\models;
 use yii\db\ActiveRecord;
 
 /**
- * Description of AlbumToUser
+ * AlbumToUser model class for table "album_to_user"
  *
+ * @property integer $id
+ * @property integer $album_id
+ * @property integer $user_id
+ * 
  * @author Diana Galiulina
  */
 class AlbumToUser extends ActiveRecord

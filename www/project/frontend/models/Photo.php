@@ -5,8 +5,12 @@ namespace frontend\models;
 use yii\db\ActiveRecord;
 
 /**
- * Description of Photo
+ * Photo model class for table "photo"
  *
+ * @property integer $id
+ * @property integer $album_id
+ * @property string $name
+ * 
  * @author Diana Galiulina
  */
 class Photo extends ActiveRecord

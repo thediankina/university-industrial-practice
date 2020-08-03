@@ -3,10 +3,18 @@
 namespace frontend\controllers;
 
 use frontend\models\Photo;
-use frontend\models\Album;
 
+/**
+ * Photo controller
+ */
 class PhotoController extends \yii\web\Controller
 {
+    /**
+     * View photo
+     * @param integer $id
+     * @param string $name
+     * @return mixed
+     */
     public function actionView($id, $name)
     {
         $conditions = ['album_id' => $id];

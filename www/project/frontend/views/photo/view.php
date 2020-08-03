@@ -1,5 +1,5 @@
 <?php
-/* @var $album frontend\controllers\AlbumController */
+/* @var $name frontend\controllers\PhotoController */
 
 $this->title = 'View photo';
 ?>
